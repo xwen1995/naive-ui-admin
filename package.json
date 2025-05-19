@@ -78,6 +78,7 @@
     "prettier": "^2.8.8",
     "pretty-quick": "^3.3.1",
     "rimraf": "^3.0.2",
+    "sass-embedded": "^1.89.0",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^29.0.0",

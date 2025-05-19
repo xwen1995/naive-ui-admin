@@ -39,6 +39,18 @@ const adminInfo = {
 };
 
 export default defineMock({
-  '[POST]/api/login': () => resultSuccess({ token }),
-  '/api/admin_info': () => resultSuccess(adminInfo),
+  '[POST]/api/admin/employee/login': () => {
+    return {
+      code: 1,
+      data: {
+        "id": 1,
+        "userName": "admin",
+        "name": null,
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbXBJZCI6MSwiZXhwIjoxNzQ3NjQzMDcyfQ.gcb_IwjrBqOR37oWD3QkQ8Z-ZEAWBUmk06P6RdtFn3A"
+      },  // 将token放在result对象中
+      message: 'ok',
+      type: 'success'
+    };
+  },
+  '/api/admin/employee/admin_info': () => resultSuccess(adminInfo),
 });

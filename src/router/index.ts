@@ -7,14 +7,22 @@ import type { IModuleType } from './types';
 
 const modules = import.meta.glob<IModuleType>('./modules/**/*.ts', { eager: true });
 
+
+// 将模块中的路由记录整合到一个数组中
 const routeModuleList: RouteRecordRaw[] = Object.keys(modules).reduce((list, key) => {
-  const mod = modules[key].default ?? {};
-  const modList = Array.isArray(mod) ? [...mod] : [mod];
+  const mod = modules[key].default;
+  // 更明确的空值检查
+  if (!mod) return list;
+  // 统一转为数组格式
+  const modList = Array.isArray(mod) ? mod : [mod];
   return [...list, ...modList];
 }, []);
 
 function sortRoute(a, b) {
-  return (a.meta?.sort ?? 0) - (b.meta?.sort ?? 0);
+  // 添加对undefined值的处理
+  const sortA = a.meta?.sort ?? Number.MAX_SAFE_INTEGER;
+  const sortB = b.meta?.sort ?? Number.MAX_SAFE_INTEGER;
+  return sortA - sortB;
 }
 
 routeModuleList.sort(sortRoute);
